@@ -1,0 +1,111 @@
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[twoside,12pt]{DissertationStyle}
+
+
+%: ----------------------------------------------------------------------
+%:                  TITLE PAGE: name, degree,..
+% ----------------------------------------------------------------------
+% below is to generate the title page with crest and author name
+
+% if output to PDF then put the following in PDF header
+\ifpdf
+    \pdfinfo {
+        /Title  (PhD dissertation)
+        /Creator ()
+        /Producer ()
+        /Author (Jane Doe)
+        /CreationDate (D:201601150000)  %format D:YYYYMMDDhhmmss
+        /ModDate (D:201601150000)
+        /Subject (Computer Science)
+        /Keywords ()
+    }
+    \pdfcatalog {
+        /PageMode (/UseOutlines)
+        /OpenAction (fitbh)
+    }
+\fi
+
+% Title of the dissertation
+\title{Super fancy title for your superb research}
+
+% ----------------------------------------------------------------------
+
+% turn of those nasty overfull and underfull hboxes
+\hbadness=10000
+\hfuzz=50pt
+
+
+%: --------------------------------------------------------------
+%:                  FRONT MATTER: dedications, abstract,..
+% --------------------------------------------------------------
+
+\begin{document}
+
+% sets line spacing
+\renewcommand\baselinestretch{1.2}
+\baselineskip=18pt plus1pt
+
+%: ----------------------- generate frontmatter ------------------------
+
+\maketitle
+\dedication
+
+\input{0_frontmatter/abstract}
+\input{0_frontmatter/acknowledgements}
+
+\selectlanguage{british}
+
+
+%: ----------------------- contents ------------------------
+
+\setcounter{secnumdepth}{5} % organisational level that receives a numbers
+\setcounter{tocdepth}{5}    % print table of contents for level 3
+
+
+%%You can also add extra lines to the ToC or to force extra unnumbered section headings to be included. For example, if you wanted to add an entry called Preface, and you didn't want the Preface to be numbered, you'd use these commands:
+%\ subsection*{Preface}
+%\addcontentsline{toc}{subsection}{Preface}
+\pagenumbering{roman}
+\setcounter{page}{1}
+\tableofcontents            % print the table of contents
+% levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsection
+
+%: ----------------------- list of figures/tables ------------------------
+
+\listoffigures	% print list of figures
+\listoftables  % print list of tables
+\listoflistings
+\addcontentsline{toc}{chapter}{List of Listings}
+
+\input{0_frontmatter/acronyms}
+\printnomenclature
+
+
+%: --------------------------------------------------------------
+%:                  MAIN DOCUMENT SECTION
+% --------------------------------------------------------------
+
+% the main text starts here with the introduction, 1st chapter,...
+\mainmatter
+
+%: ----------------------- chapters ------------------------
+
+\input{1st_chapter/0_main}
+\input{2nd_chapter/0_main}
+
+\backmatter
+
+% ----------------------------------------------------------------------------------------------------
+%   Back matter
+% ----------------------------------------------------------------------------------------------------
+
+\bibliographystyle{apa}
+\bibliography{references}
+
+\cleardoublepage
+
+\input{9_backmatter/declaration}
+\input{9_backmatter/end_date}
+
+\end{document}
